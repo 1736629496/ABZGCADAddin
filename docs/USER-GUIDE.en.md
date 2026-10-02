@@ -8,11 +8,7 @@ version-matrix topics are not part of this distribution.
 ## 1. What this is
 
 Extracts **layers, geometry, text, blocks and dimensions** from the current drawing
-and exports them to **JSON**.
-
-> **This build exposes JSON only.** The Excel and CSV exporters and their column
-> definitions are still in the program — they simply do not appear in the export menu
-> yet, so that menu has just "save to" and "file name".
+and exports them to **CSV, Excel (.xlsx) or JSON**.
 
 The UI is a standalone, light-themed window (not a docked side panel). AutoCAD,
 BricsCAD and ZWCAD all share the same commands and the same interface.
@@ -249,21 +245,19 @@ A few things worth knowing:
 
 ### 5.3 Export
 
-Click **`Export`** in the top-right corner, choose a folder and a file name in the menu
-that opens, then press `Export` to write the file.
+Click **`Export`** in the top-right corner; in the menu that opens, pick a format, a
+folder and a file name, then press `Export` to write the file.
 
 ![Export menu](images/preview-export-menu.png)
 
-**JSON is the only choice for now**, which is why the menu has no "Format" section.
-(The Excel and CSV exporters and their column definitions are still in the program;
-if they are exposed again, the format rows reappear in the menu on their own — no UI
-code changes.)
+| Format | Extension | Character |
+|---|---|---|
+| **JSON** | `.json` | Types are preserved (numbers stay numbers, booleans stay booleans); good for feeding another program |
+| **Excel** | `.xlsx` | Numeric values are real number cells, ready to use as a table; one sheet is capped at 1,048,575 rows |
+| **CSV** | `.csv` | Plain text, comma-separated; written with a UTF-8 BOM so Excel reads Chinese correctly |
 
-| Format | Extension | Status | Character |
-|---|---|---|---|
-| **JSON** | `.json` | **in the menu** | Types are preserved (numbers stay numbers, booleans stay booleans) |
-| Excel | `.xlsx` | not exposed yet | Numeric values are real number cells; one sheet is capped at 1,048,575 rows |
-| CSV | `.csv` | not exposed yet | Plain text, comma-separated; written with a UTF-8 BOM so Excel reads Chinese correctly |
+**All three formats write the same data** — the same rows and the same column
+definitions. Pick according to what you will do with the file next.
 
 The export range is **what is currently in the middle column** (i.e. left-column
 selection ∩ filter).
