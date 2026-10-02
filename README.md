@@ -18,21 +18,19 @@ This repository hosts the released build and the user guide. It contains
 
 ## Supported CAD versions
 
-| CAD | Supported versions | Notes |
-|---|---|---|
-| **AutoCAD** | **2016 – 2027** | Full product required; **AutoCAD LT is not supported** |
-| **BricsCAD** | **V26 / V27** | **Pro or higher** required |
-| **ZWCAD** | **2025 – 2026** | Start ZWCAD once before first use, so it writes its registry keys |
-| ZWCAD 2021 – 2024 | ⚠️ **not included** | Installing has no effect and reports no error |
+| CAD | Supported versions |
+|---|---|
+| **AutoCAD** | **2025 / 2026 / 2027** |
+| **ZWCAD** | **2025 / 2026** |
+| **BricsCAD** | **V26** (BricsCAD 2026) |
 
-**Verified on real machines** (2026-10-02): AutoCAD **2025 / 2026 / 2027**, ZWCAD
-**2025 / 2026**, BricsCAD **V26** — payload installs, command is recognised, window
-opens, data reads out. Every other version is at the "compiled against that year's
-real CAD API" level only.
+These are **verified on real machines**: the payload installs, the command is
+recognised, the window opens and data reads out. **Any other version has not been
+tested** — that does not mean it cannot work, only that it has not been verified.
 
-> ⚠️ **ZWCAD 2021 – 2024 is not part of this package** — building that payload needs
-> the assemblies from a ZWCAD 2024 installation. On those releases the plugin simply
-> does not load: no effect, no error, and ZWCAD itself is unaffected.
+> ⚠️ **ZWCAD 2024 and earlier is not part of this package** — building that payload
+> needs the assemblies from a ZWCAD 2024 installation. On those releases the plugin
+> simply does not load: no effect, no error, and ZWCAD itself is unaffected.
 
 One installer covers all of the above and installs per-user by default — **no
 administrator rights needed**. See [§2 of the user guide](docs/USER-GUIDE.en.md)
@@ -45,11 +43,10 @@ that run on the modern managed runtime:
 
 | Your release | Extra install needed? |
 |---|---|
-| AutoCAD 2016 – 2024 | No |
 | AutoCAD 2025 / 2026 | .NET 8 |
 | AutoCAD 2027 | .NET 10 |
-| BricsCAD V26 / V27 | .NET 8 |
-| ZWCAD 2025 – 2026 | No |
+| BricsCAD V26 | .NET 8 |
+| ZWCAD 2025 / 2026 | No |
 
 > It must be the **Desktop** Runtime, not the plain .NET Runtime. The UI is WPF, and
 > without `Microsoft.WindowsDesktop.App` the plugin **fails to load and reports

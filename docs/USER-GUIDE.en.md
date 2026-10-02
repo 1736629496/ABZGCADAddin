@@ -1,4 +1,4 @@
-﻿# ABZG CAD Data Extractor — User Guide
+# ABZG CAD Data Extractor — User Guide
 
 For **end users**. This guide is self-contained — development, build and
 version-matrix topics are not part of this distribution.
@@ -19,34 +19,35 @@ BricsCAD and ZWCAD all share the same commands and the same interface.
 
 ## 2. Supported CAD versions
 
-| CAD | Supported versions | Notes |
-|---|---|---|
-| **AutoCAD** | **2016 – 2027** (twelve releases) | Requires the full product; **AutoCAD LT is not supported** (it does not expose the .NET API) |
-| **BricsCAD** | **V26 / V27** | Requires **Pro or higher**; Lite / Shape do not expose the BRX managed API. **V25 and earlier are not supported** (those are .NET Framework based) |
-| **ZWCAD** | **2025 – 2026** | Both releases share one payload. **Start ZWCAD once** before first use so it writes its installation info into the registry (see §4.4) |
-| ZWCAD 2021 – 2024 | ⚠️ **not included in this installer** | Installing has no effect and reports no error. See the note below |
+| CAD | Supported versions |
+|---|---|
+| **AutoCAD** | **2025 / 2026 / 2027** |
+| **ZWCAD** | **2025 / 2026** |
+| **BricsCAD** | **V26** (i.e. BricsCAD 2026) |
 
-> ⚠️ **ZWCAD 2021 – 2024 is not part of this package.** Building that payload needs
-> the assemblies from a **ZWCAD 2024** installation, which is not at hand. So on
-> ZWCAD 2021 / 2022 / 2023 / 2024 the plugin **will not take effect** after installing
-> (harmlessly — it simply does not load; ZWCAD itself is unaffected). If those years
-> need to be covered, provide a ZWCAD 2024 install directory to the build side and
-> the payload will be added.
+These six releases across the three hosts are **verified on real machines**: the
+payload installs, the command is recognised, the window opens and data reads out.
+**Any other version has not been tested** — that does not mean it cannot work, only
+that it has not been verified.
 
-**Verified on real machines** (as of 2026-10-02): **AutoCAD 2025 / 2026 / 2027**,
-**ZWCAD 2025 / 2026**, **BricsCAD V26** — for these it was confirmed that the payload
-installs, the command is recognised, the window opens and data is read out. Every
-other version is at the "compiled against that year's real CAD API" level only and
-has not been tried yet on a machine with that host.
+Prerequisites per host:
 
-**A single installer covers all of the above** (except ZWCAD 2021 – 2024, see the
-note above). It lays down the payload for every
-release / generation — whichever versions you have installed, the matching payload
-takes effect automatically and the rest simply sit there; if you install another CAD
-later, that payload starts working without reinstalling the plugin.
+- **AutoCAD**: the full product is required; **AutoCAD LT is not supported** (it does
+  not expose the .NET API). 2025 / 2026 need the **.NET 8 Desktop Runtime**, 2027 needs
+  the **.NET 10 Desktop Runtime**.
+- **BricsCAD**: **Pro or higher** required; Lite / Shape do not expose the BRX managed API.
+- **ZWCAD**: **start ZWCAD once** before first use so it writes its installation info
+  into the registry (see §4.4).
 
-So it is **normal** to see "12 AutoCAD year payloads" on a machine that only has 2016.
-The installer also reports what this machine actually has, under `==> This machine`.
+> ⚠️ **This installer does not contain the ZWCAD 2024-and-earlier payload.** Building it
+> needs the assemblies from a **ZWCAD 2024** installation, which is not at hand. So on
+> ZWCAD 2021 / 2022 / 2023 / 2024 the plugin **will not take effect and reports no error**
+> (it simply does not load; ZWCAD itself is unaffected). If those years need to be covered,
+> provide a ZWCAD 2024 install directory to the build side and the payload will be added.
+
+The installer lays down the payload for several releases at once (the ones you do not
+have simply sit there, doing no harm); the `==> This machine` section reports what is
+actually present.
 
 ---
 
@@ -61,11 +62,10 @@ The installer also reports what this machine actually has, under `==> This machi
 
 | Your release | Extra install needed? |
 |---|---|
-| AutoCAD 2016 – 2024 | No (the host ships its own .NET Framework) |
 | AutoCAD 2025 / 2026 | **.NET 8** |
 | AutoCAD 2027 | **.NET 10** |
-| **BricsCAD V26 / V27** | **.NET 8** |
-| ZWCAD 2025 – 2026 | No |
+| **BricsCAD V26** | **.NET 8** |
+| ZWCAD 2025 / 2026 | No |
 
 When it is needed, install **`.NET Desktop Runtime 8.0 (x64)`**:
 
@@ -298,7 +298,7 @@ column set is not fixed.
 Check in this order:
 
 1. **Is the version supported**: check the host version under `Help → About` against §2
-   (AutoCAD must be the full product, not LT; BricsCAD must be Pro or higher, V26/V27).
+   (AutoCAD must be the full product, not LT; BricsCAD must be Pro or higher).
 2. **Is the runtime there**: with AutoCAD 2025+ or BricsCAD V26+, run
    `dotnet --list-runtimes` and make sure there is a
    **`Microsoft.WindowsDesktop.App 8.0.x`** entry (`Microsoft.NETCore.App` alone is
