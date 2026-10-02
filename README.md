@@ -1,7 +1,10 @@
 # ABZG CAD Data Extractor
 
 Extract **layers, geometry, text, blocks and dimensions** from a drawing and export
-them to **Excel / CSV / JSON** — from inside AutoCAD, BricsCAD or ZWCAD.
+them to **JSON** — from inside AutoCAD, BricsCAD or ZWCAD.
+
+> This build exposes **JSON only**. The Excel and CSV exporters are still in the
+> program; they simply do not appear in the export menu yet.
 
 This repository hosts the released build and the user guide. It contains
 **no source code**.
