@@ -39,7 +39,8 @@ installs, the command is recognised, the window opens and data is read out. Ever
 other version is at the "compiled against that year's real CAD API" level only and
 has not been tried yet on a machine with that host.
 
-**A single installer covers all of the above.** It lays down the payload for every
+**A single installer covers all of the above** (except ZWCAD 2021 – 2024, see the
+note above). It lays down the payload for every
 release / generation — whichever versions you have installed, the matching payload
 takes effect automatically and the rest simply sit there; if you install another CAD
 later, that payload starts working without reinstalling the plugin.
